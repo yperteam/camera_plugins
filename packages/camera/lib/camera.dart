@@ -634,4 +634,18 @@ class CameraController extends ValueNotifier<CameraValue> {
       await _eventSubscription?.cancel();
     }
   }
+
+  /// Flash
+  Future<void> flash(bool value) async {
+    try {
+      await _channel.invokeMapMethod<String, dynamic>(
+        'enableFlash',
+        <String, dynamic>{
+          'flash': value,
+        },
+      );
+    } on PlatformException catch (e) {
+      throw CameraException(e.code, e.message);
+    }
+  }
 }

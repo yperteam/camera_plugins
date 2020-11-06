@@ -890,6 +890,10 @@ FourCharCode const videoFormat = kCVPixelFormatType_32BGRA;
       [_camera startVideoRecordingAtPath:call.arguments[@"filePath"] result:result];
     } else if ([@"stopVideoRecording" isEqualToString:call.method]) {
       [_camera stopVideoRecordingWithResult:result];
+    } else if ([@"enableFlash" isEqualToString:call.method]) {
+      BOOL isEnabled = [call.arguments[@"flash"] boolValue];
+      [_camera setFlash:isEnabled];
+      result(nil);
     } else {
       result(FlutterMethodNotImplemented);
     }
